@@ -62,8 +62,8 @@ class Inimigo(Pessoa):
 
         super().__init__(nome=nome, pokemons=pokemons)
 
-inimigo = Inimigo()
-print(inimigo.tipo)
-inimigo.mostrar_pokemons()
+#inimigo = Inimigo()
+#print(inimigo.tipo)
+#inimigo.mostrar_pokemons()
 
 
