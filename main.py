@@ -33,7 +33,11 @@ def escolher_pokemon_inicial(player):
             print('opção inexistente, por favor escolha 1 2 ou 3 para escolher um pokemon')
 
 jogador = Player(nome='Yumi')
-escolher_pokemon_inicial(jogador)
+#escolher_pokemon_inicial(jogador)
+jogador.capturar(PokemonSombrio('Umbreon', level=1))
 
+inimigo1 = Inimigo(nome='Gary', pokemons=[PokemonEletrico('Pikachu', level=1)])
+
+jogador.batalhar(inimigo1)
 
 
