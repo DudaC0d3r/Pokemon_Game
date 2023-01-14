@@ -23,7 +23,7 @@ POKEMONS = [
 
 class Pessoa:
 
-    def __init__(self, nome=None, pokemons=[]):
+    def __init__(self, nome=None, pokemons=[], dinheiro=100):
         if nome:
             self.nome = nome
 
@@ -31,6 +31,8 @@ class Pessoa:
             self.nome = random.choice(NOMES)
 
         self.pokemons = pokemons
+
+        self.dinheiro = dinheiro
 
     def __str__(self):
         return self.nome
@@ -52,6 +54,13 @@ class Pessoa:
         else:
             print('ERRO: esse jogador nn possui nenhum pokemon para ser escolhido')
 
+    def mostrar_dinheiro(self):
+        print('vc possui $ {} em sua conta'.format(self.dinheiro))
+
+    def ganhar_dinheiro(self, quantidade):
+        self.dinheiro += quantidade
+        print('vc ganhou $ {}'.format(quantidade))
+        self.mostrar_dinheiro()
 
     def batalhar(self, pessoa):
         print('{} iniciou uma batalha com {}'.format(self, pessoa))
@@ -66,6 +75,7 @@ class Pessoa:
                 vitoria = pokemon.atacar(pokemon_inimigo)
                 if vitoria:
                     print('{} ganhou a batalha'.format(self))
+                    self.ganhar_dinheiro(pokemon_inimigo.level * 100)
                     break
                 vitoria_inimigo = pokemon_inimigo.atacar(pokemon)
                 if vitoria_inimigo:
@@ -99,6 +109,21 @@ class Player(Pessoa):
             else:
                 print('esse jogador nn possui nenhum pokemon para ser escolhido')
 
+    def explorar(self):
+        if random.random() <= 0.3:
+            pokemon = random.choice(POKEMONS)
+            print('um pokemon selvagem apareceu: {}'.format(pokemon))
+
+            escolha = input('deseja capturxarx esse pokemon? (s/n):')
+            if escolha == 's':
+                if random.random() >= 0.5:
+                    self.capturar(pokemon)
+                else:
+                    print('{} fugiu'.format(pokemon))
+            else:
+                print('ok, boa viagem')
+        else:
+            print('essa exploxração nao deu em nd')
 
 class Inimigo(Pessoa):
     tipo = 'inimigo'
