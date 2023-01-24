@@ -71,6 +71,7 @@ class Pessoa:
         pokemon = self.escolher_pokemon()
 
         if pokemon and pokemon_inimigo:
+
             while True:
                 vitoria = pokemon.atacar(pokemon_inimigo)
                 if vitoria:
@@ -93,21 +94,21 @@ class Player(Pessoa):
         self.pokemons.append(pokemon)
         print('{} capturou {}'.format(self, pokemon))
 
-        def escolher_pokemon(self):
-            self.mostrar_pokemons()
+    def escolher_pokemon(self):
+        self.mostrar_pokemons()
 
-            if self.pokemons:
-                while True:
-
-                    try:
-                        escolha = int(input('escolha o seu pokemon: '))
-                        pokemon_escolhido = self.pokemons[escolha]
-                        print('{} eu escolho vc! '.format(pokemon_escolhido))
-                        return pokemon_escolhido
-                    except:
-                        print('escolha invalida')
-            else:
-                print('esse jogador nn possui nenhum pokemon para ser escolhido')
+        if self.pokemons:
+            while True:
+                escolha = input("Escolha o seu Pokemon: ")
+                try:
+                    escolha = int(escolha)
+                    pokemon_escolhido = self.pokemons[escolha]
+                    print("{} eu escolho você!!!".format(pokemon_escolhido))
+                    return pokemon_escolhido
+                except:
+                    print("Escolha inválida")
+        else:
+            print("ERRO: Esse jogador não possui nenhum pokemon para ser escolhido")
 
     def explorar(self):
         if random.random() <= 0.3:
@@ -128,17 +129,20 @@ class Player(Pessoa):
 class Inimigo(Pessoa):
     tipo = 'inimigo'
     
-    def __init__(self, nome=None, pokemons=[]):
+    def __init__(self, nome=None, pokemons=None):
         if not pokemons:
+            pokemons_aleatorios = []
             for i in range(random.randint(1, 6)):
-                pokemons.append(random.choice(POKEMONS))
+                pokemons_aleatorios.append(random.choice(POKEMONS))
 
-        super().__init__(nome=nome, pokemons=pokemons)
+            super().__init__(nome=nome, pokemons=pokemons_aleatorios)
+        else:
+            super().__init__(nome=nome, pokemons=pokemons)
 
-
-#inimigo = Inimigo()
+inimigo = Inimigo()
 #print(inimigo.tipo)
 #-inimigo.mostrar_pokemons()
+
 
 
 
