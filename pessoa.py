@@ -73,18 +73,29 @@ class Pessoa:
         if pokemon and pokemon_inimigo:
 
             while True:
-                vitoria = pokemon.atacar(pokemon_inimigo)
-                if vitoria:
-                    print('{} ganhou a batalha'.format(self))
-                    self.ganhar_dinheiro(pokemon_inimigo.level * 100)
-                    break
-                vitoria_inimigo = pokemon_inimigo.atacar(pokemon)
-                if vitoria_inimigo:
-                    print('{} ganhou a batalha'.format(pessoa    ))
-                    break
+
+                try:
+                    if pokemon.vida <= 0:
+                        print('recuperando vida do seu pokemon')
+                        pokemon.vida += pokemon.level * 20
+
+
+                    vitoria = pokemon.atacar(pokemon_inimigo)
+                    if vitoria:
+                        print('{} ganhou a batalha'.format(self))
+                        self.ganhar_dinheiro(pokemon_inimigo.level * 100)
+                        break
+                    vitoria_inimigo = pokemon_inimigo.atacar(pokemon)
+                    if vitoria_inimigo:
+                        print('{} ganhou a batalha'.format(pessoa))
+                        break
+                except:
+                    print("Escolha inválida")
 
         else:
             print('Essa batalha nn pode ocorrer')
+
+
 
 
 class Player(Pessoa):
@@ -139,7 +150,7 @@ class Inimigo(Pessoa):
         else:
             super().__init__(nome=nome, pokemons=pokemons)
 
-inimigo = Inimigo()
+#inimigo = Inimigo()
 #print(inimigo.tipo)
 #-inimigo.mostrar_pokemons()
 

@@ -15,15 +15,26 @@ class Pokemon:
         else:
             self.nome = especie
 
-        self.ataque = self.level * 5
-        self.vida = self.level * 10
+
+        self.ataque = self.level * 10
+        self.vida = self.level * 20
+
+
 
     def __str__(self):
         return '{} ({})'.format(self.especie, self.level)
 
     def atacar(self, pokemon):
-        pokemon.vida = pokemon.vida - self.ataque
-        print('{} perdeu {} pontos de vida'.format(pokemon, self.ataque))
+        print('{} tem {} pontos de vida'.format(self, self.vida))
+        print('{} tem {} pontos de vida'.format(pokemon, pokemon.vida))
+
+        ataque_efetivo = int((self.ataque * random.random() * 1.3))
+        pokemon.vida -= ataque_efetivo
+
+
+
+
+        print('{} perdeu {} pontos de vida'.format(pokemon, ataque_efetivo))
 
         if pokemon.vida <= 0:
             print('{} foi derrotado'.format(pokemon))
@@ -72,6 +83,7 @@ class PokemonAgua(Pokemon):
     def atacar(self, pokemon):
         print('{} lançou um ataque de agua em {}'.format(self, pokemon))
         return super().atacar(pokemon)
+
 class PokemonFada(Pokemon):
     tipo = 'fada'
 
@@ -102,6 +114,7 @@ class PokemonLutador(Pokemon):
 
 class PokemonVeneno(Pokemon):
     tipo = 'veneno'
+    mana = 10
 
     def atacar(self, pokemon):
         print('{} lançou um ataque de veneno em {}'.format(self, pokemon))
@@ -114,9 +127,9 @@ class PokemonInseto(Pokemon):
         print('{} lançou um ataque de inseto em {}'.format(self, pokemon))
         return super().atacar(pokemon)
 
-meu_pokemon = PokemonSolar(level=1000000, especie='solgaleio')
+#meu_pokemon = PokemonSolar(level=1000000, especie='solgaleio')
 
-pokemon_amigo = PokemonLunar('lunala')
+#pokemon_amigo = PokemonLunar('lunala')
 
 
 
