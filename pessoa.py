@@ -71,6 +71,7 @@ class Pessoa:
         pokemon = self.escolher_pokemon()
 
         if pokemon and pokemon_inimigo:
+            reduzir = False
 
             while True:
 
@@ -79,16 +80,29 @@ class Pessoa:
                         print('recuperando vida do seu pokemon')
                         pokemon.vida += pokemon.level * 20
 
+                    atacar = int(input('1- atacar ou 2 - diminuir ataque inimigo ' ))
+                    if atacar == 1:
+                        vitoria = pokemon.atacar(pokemon_inimigo)
+                        if vitoria:
+                            print('{} ganhou a batalha'.format(self))
+                            self.ganhar_dinheiro(pokemon_inimigo.level * 100)
+                            break
+                    elif atacar == 2:
+                        reduzir = True
 
-                    vitoria = pokemon.atacar(pokemon_inimigo)
-                    if vitoria:
-                        print('{} ganhou a batalha'.format(self))
-                        self.ganhar_dinheiro(pokemon_inimigo.level * 100)
-                        break
-                    vitoria_inimigo = pokemon_inimigo.atacar(pokemon)
-                    if vitoria_inimigo:
-                        print('{} ganhou a batalha'.format(pessoa))
-                        break
+
+                    if reduzir:
+                        vitoria_inimigo = pokemon_inimigo.ataque_reduzido(pokemon)
+                        if vitoria_inimigo:
+                            print('{} ganhou a batalha'.format(pessoa))
+                            break
+                    else:
+                        vitoria_inimigo = pokemon_inimigo.atacar(pokemon)
+                        if vitoria_inimigo:
+                            print('{} ganhou a batalha'.format(pessoa))
+                            break
+
+
                 except:
                     print("Escolha inválida")
 

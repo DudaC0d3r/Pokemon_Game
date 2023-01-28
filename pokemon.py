@@ -42,6 +42,22 @@ class Pokemon:
         else:
             return False
 
+    def ataque_reduzido(self, pokemon):
+        print('{} tem {} pontos de vida'.format(self, self.vida))
+        print('{} tem {} pontos de vida'.format(pokemon, pokemon.vida))
+
+        ataque_efetivo = int((self.ataque * random.random() * 0.5))
+        pokemon.vida -= ataque_efetivo
+
+        print('{} perdeu {} pontos de vida'.format(pokemon, ataque_efetivo))
+
+        if pokemon.vida <= 0:
+            print('{} foi derrotado'.format(pokemon))
+            return True
+        else:
+            return False
+
+
 class PokemonSolar(Pokemon):
     tipo = 'solar'
 
@@ -67,7 +83,7 @@ class PokemonEletrico(Pokemon):
     tipo = 'eletrico'
 
     def atacar(self, pokemon):
-        print('{} lançou um ataque de fogo em {}'.format(self, pokemon))
+        print('{} lançou um ataque eletrico em {}'.format(self, pokemon))
         return super().atacar(pokemon)
 
 class PokemonSombrio(Pokemon):
@@ -126,6 +142,8 @@ class PokemonInseto(Pokemon):
     def atacar(self, pokemon):
         print('{} lançou um ataque de inseto em {}'.format(self, pokemon))
         return super().atacar(pokemon)
+
+
 
 #meu_pokemon = PokemonSolar(level=1000000, especie='solgaleio')
 
