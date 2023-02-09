@@ -111,3 +111,5 @@ if __name__ == '__main__':
     #jogador.explorar()
 
     #jogador.mostrar_pokemons()
+
+#teste github desktop
